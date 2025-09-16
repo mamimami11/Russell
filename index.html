@@ -1,14 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Russell</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Russell</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; font-family: 'Roboto', sans-serif; background: #fafafa; }
+  header { background: #111; color: #fff; display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; position: fixed; width: 100%; top:0; z-index: 1000; }
+  header .logo { font-size: 1.5em; font-weight: bold; }
+  nav { display: flex; gap: 20px; }
+  nav a { color: #fff; text-decoration: none; font-weight: 500; transition: 0.3s; }
+  nav a:hover { color: #f0a500; }
+  .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 4px; }
+  .menu-toggle div { width: 25px; height: 3px; background: #fff; }
+  main { padding-top: 80px; }
+  section { padding: 80px 20px; }
+  .hero { background: url('https://images.unsplash.com/photo-1602524202275-7a4c6d0f3ecf?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; color: #fff; height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .hero h1 { font-size: 3em; margin: 0; }
+  .hero p { font-size: 1.2em; margin: 10px 0 0; }
+  .section-title { text-align: center; font-size: 2em; margin-bottom: 40px; }
+  .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+  .product-card { background: #f5f5f5; padding: 15px; border-radius: 10px; text-align: center; transition: 0.3s; font-weight: bold; }
+  .product-card:hover { transform: scale(1.05); }
+  .contact-links a { display: block; margin: 5px 0; color: #111; text-decoration: none; font-weight: bold; }
+  .whatsapp-button { position: fixed; bottom: 20px; right: 20px; background: #25D366; color: #fff; border-radius: 50%; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; font-size: 2em; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; }
+  @media (max-width:768px) {
+    nav { display: none; flex-direction: column; background: #111; position: absolute; top: 60px; right: 0; width: 200px; padding: 20px; }
+    nav.show { display: flex; }
+    .menu-toggle { display: flex; }
+  }
+</style>
 </head>
 <body>
-  <h1>Welcome to Russell!</h1>
-  <p>Instagram: <a href="https://www.instagram.com/russelltex_/">@russelltex_</a></p>
-  <p>Facebook: <a href="https://m.facebook.com/61577510738128/">Russell on Facebook</a></p>
-  <p>WhatsApp: <a href="https://wa.me/995555558448">+995 555 558 448</a></p>
-</body>
-</html>
+
+<header>
+  <div class="logo">Russell</div>
+  <div class="menu-toggle" onclick="toggleMenu()">
+    <div></div><div></div><div></div>
+  </div>
+  <nav id="nav">
+    <a href="#home">Главная</a>
+    <a href="#about">О бренде</a>
+    <a href="#products">Продукция</a>
+    <a href="#contacts">Контакты</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <h1>Добро пожаловать в Russell</h1>
+    <p>Высококачественные ковры и подушки с восточным узором</p>
+  </section>
+
+  <section id="about">
+    <h2 class="section-title">О бренде</h2>
+    <p style="max-width:800px;margin:0 auto;text-align:center;">Russell предлагает уникальные восточные ковры и подушки ручной работы. Наши изделия сочетают традиции и современный стиль, чтобы ваш дом стал уютным и красивым.</p>
+  </section>
+
+  <section id="products">
+    <h2 class="section-title">Продукция</h2>
+    <div class="products">
+      <!-- Ковры 10 блоков -->
+      <div class="product-card">Ковер 80x150 см — 49 лари</div>
+      <div class="product-card">Ковер 80x150 см — 49 лари</div>
+      <div class="product-card">Ковер 80x150 см — 49 лари</div>
+      <div class="product-card">Ковер 80x150 см — 49 лари</div>
+      <div class="product-card">Ковер 80x150 см — 49 лари</div>
+      <div class="product-card">Ковер 80x150 см — 49 лари</div>
+      <div class="product-card">Ковер 80x150 см — 49 лари</div>
+      <div class="product-card">Ковер 80x150 см — 49 лари</div>
+      <div class="product-card">Ковер 80x150 см — 49 лари</div>
+      <div class="product-card">Ковер 80x150 см — 49 лари</div>
+
+      <!-- Подушки 35 блоков -->
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+
+      <!-- Шторы 22 блока -->
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+      <div class="product-card">Шторы — цена по запросу</div>
+
+      <!-- Гобеленовая ткань 10 блоков -->
+      <div class="product-card">Гобеленовая ткань, 1 метр — 19 лари</div>
+      <div class="product-card">Гобеленовая ткань, 1 метр — 19 лари</div>
+      <div class="product-card">Гобеленовая ткань, 1 метр — 19 лари</div>
+      <div class="product-card">Гобеленовая ткань, 1 метр — 19 лари</div>
+      <div class="product-card">Гобеленовая ткань, 1 метр — 19 лари</div>
+      <div class

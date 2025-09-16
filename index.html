@@ -2,132 +2,106 @@
 <html lang="ka">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Russell</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-body { margin:0; font-family: 'Roboto', sans-serif; background:#f2f2f2; overflow-x:hidden;}
-header { background: #4CAF50; color: #fff; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; position: fixed; width: 100%; top:0; z-index: 1000; box-shadow:0 4px 10px rgba(0,0,0,0.2);}
-header .logo { font-size: 1.8em; font-weight: bold; }
-.menu-toggle { display: flex; flex-direction: column; cursor: pointer; gap: 4px; }
-.menu-toggle div { width: 25px; height: 3px; background: #fff; }
-nav { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; background: #4CAF50; width: 200px; padding: 15px; }
-nav a { color: #fff; text-decoration: none; padding:10px 0; font-weight:500; transition:0.3s; }
-nav a:hover { background: rgba(255,255,255,0.2); }
-.lang-select { position: fixed; top:15px; right:20px; background:#fff; color:#4CAF50; padding:8px 12px; border-radius:5px; cursor:pointer; z-index:1000; }
-.lang-options { display:none; position:fixed; top:50px; right:20px; background:#fff; border:1px solid #ccc; border-radius:5px; }
-.lang-options div { padding:8px 12px; cursor:pointer; }
-.lang-options div:hover { background:#f0f0f0; }
-main { padding-top:80px; }
-section { padding: 60px 20px; text-align:center; }
-.section-title { font-size:2em; margin-bottom:40px; }
-.products { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:20px; }
-.product-card { background:#fff; padding:15px; border-radius:10px; text-align:center; transition:0.3s; }
-.product-card:hover { transform:scale(1.05); }
-.contact-links a { display:block; margin:5px 0; color:#111; text-decoration:none; font-weight:bold; }
-.whatsapp-button { position: fixed; bottom: 20px; right: 20px; background: #25D366; color: #fff; border-radius: 50%; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; font-size: 2em; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; }
+body {margin:0; font-family:'Roboto',sans-serif; background:#f0f2f5;}
+header {display:flex; justify-content:center; align-items:center; position:fixed; top:0; width:100%; background:#27ae60; padding:15px; z-index:1000;}
+.menu-toggle {position:absolute; left:15px; display:flex; flex-direction:column; gap:4px; cursor:pointer;}
+.menu-toggle div {width:25px; height:3px; background:#fff;}
+.logo {color:#fff; font-size:1.8em; font-weight:bold;}
+#langSelect {position:absolute; right:15px; background:#fff; padding:5px 10px; border-radius:5px; cursor:pointer;}
+nav {position:fixed; top:60px; left:0; width:200px; background:#27ae60; display:none; flex-direction:column; padding:20px; z-index:1000;}
+nav.show {display:flex;}
+nav a {color:#fff; text-decoration:none; margin:10px 0; font-weight:bold;}
+main {padding-top:80px;}
+.section-title {text-align:center; font-size:2em; margin:20px 0;}
+.products {display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; padding:0 20px;}
+.product-card {background:#fff; border-radius:10px; padding:15px; text-align:center; box-shadow:0 2px 6px rgba(0,0,0,0.2);}
+.product-card button {margin-top:10px; padding:10px 15px; background:#27ae60; color:#fff; border:none; border-radius:5px; cursor:pointer;}
+.whatsapp-button {position:fixed; bottom:20px; right:20px; background:#25D366; color:#fff; border-radius:50%; width:60px; height:60px; display:flex; justify-content:center; align-items:center; font-size:2em; text-decoration:none; box-shadow:0 4px 10px rgba(0,0,0,0.3);}
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">Russell</div>
   <div class="menu-toggle" onclick="toggleMenu()">
     <div></div><div></div><div></div>
   </div>
-  <nav id="nav">
-    <a href="#paradebi" data-key="ფარდაგები">ფარდაგები</a>
-    <a href="#podushki" data-key="კალათები">კალათები</a>
-    <a href="#shtory" data-key="ფარდები">ფარდები</a>
-    <a href="#gabelin" data-key="გაბელინი">გაბელინი</a>
-    <a href="#onas" data-key="ჩვენს შესახებ">ჩვენს შესახებ</a>
-  </nav>
-  <div class="lang-select" onclick="toggleLang()">KARTULI</div>
-  <div class="lang-options" id="lang-options">
-    <div onclick="setLang('ka')">ქართული</div>
-    <div onclick="setLang('ru')">Русский</div>
-    <div onclick="setLang('en')">English</div>
-  </div>
+  <div class="logo" data-ka="რუსლ" data-ru="Russel" data-en="Russel">რუსლ</div>
+  <div id="langSelect" onclick="showLangMenu()">ქართული | რუსული | ინგლისური</div>
 </header>
 
+<nav id="nav">
+  <a href="#kovri" data-ka="ფარდაგები" data-ru="Ковры" data-en="Carpets">ფარდაგები</a>
+  <a href="#podushki" data-ka="თეთრეული" data-ru="Подушки" data-en="Pillows">თეთრეული</a>
+  <a href="#shtory" data-ka="ფარდა" data-ru="Шторы" data-en="Curtains">ფარდა</a>
+  <a href="#gabelin" data-ka="გაბელინი" data-ru="Гобелен" data-en="Gobelins">გაბელინი</a>
+  <a href="#onas" data-ka="ჩვენ შესახებ" data-ru="О нас" data-en="About">ჩვენ შესახებ</a>
+</nav>
+
 <main>
-  <section id="paradebi">
-    <h2 class="section-title" data-text-ka="ფარდაგები" data-text-ru="Ковры" data-text-en="Carpets">ფარდაგები</h2>
+  <section id="kovri">
+    <h2 class="section-title" data-ka="ფარდაგები" data-ru="Ковры" data-en="Carpets">ფარდაგები</h2>
     <div class="products">
       <!-- 10 блоков ковров -->
-      <div class="product-card">Ковер 150x80 см - 49 ლარი</div>
-      <div class="product-card">Ковер 150x80 см - 49 ლარი</div>
-      <div class="product-card">Ковер 150x80 см - 49 ლარი</div>
-      <div class="product-card">Ковер 150x80 см - 49 ლარი</div>
-      <div class="product-card">Ковер 150x80 см - 49 ლარი</div>
-      <div class="product-card">Ковер 150x80 см - 49 ლარი</div>
-      <div class="product-card">Ковер 150x80 см - 49 ლარი</div>
-      <div class="product-card">Ковер 150x80 см - 49 ლარი</div>
-      <div class="product-card">Ковер 150x80 см - 49 ლარი</div>
-      <div class="product-card">Ковер 150x80 см - 49 ლარი</div>
+      <div class="product-card" data-ka="კოვერი 150x80" data-ru="Ковер 150x80" data-en="Carpet 150x80">კოვერი 150x80
+        <div data-ka="ფასი: 49 ლარი" data-ru="Цена: 49 лари" data-en="Price: 49 Lari">ფასი: 49 ლარი</div>
+        <button onclick="openWhatsApp()">🛒 შეკვეთა</button>
+      </div>
+      <!-- Повторять блоки 10 раз -->
     </div>
   </section>
 
   <section id="podushki">
-    <h2 class="section-title" data-text-ka="კალათები" data-text-ru="Подушки" data-text-en="Cushions">კალათები</h2>
+    <h2 class="section-title" data-ka="თეთრეული" data-ru="Подушки" data-en="Pillows">თეთრეული</h2>
     <div class="products">
       <!-- 35 блоков подушек -->
-      <div class="product-card">Подушка 50x50 см - 19 ლარი</div>
-      <div class="product-card">Подушка 50x50 см - 19 ლარი</div>
-      <!-- повторить до 35 -->
+      <div class="product-card" data-ka="თეთრეული 50x50" data-ru="Подушка 50x50" data-en="Pillow 50x50">თეთრეული 50x50
+        <div data-ka="ფასი: 19 ლარი" data-ru="Цена: 19 лари" data-en="Price: 19 Lari">ფასი: 19 ლარი</div>
+        <button onclick="openWhatsApp()">🛒 შეკვეთა</button>
+      </div>
+      <!-- Повторять блоки 35 раз -->
     </div>
   </section>
 
   <section id="shtory">
-    <h2 class="section-title" data-text-ka="ფარდები" data-text-ru="Шторы" data-text-en="Curtains">ფარდები</h2>
+    <h2 class="section-title" data-ka="ფარდა" data-ru="Шторы" data-en="Curtains">ფარდა</h2>
     <div class="products">
       <!-- 22 блока штор -->
-      <div class="product-card">Штора - цена по запросу</div>
-      <!-- повторить до 22 -->
+      <div class="product-card" data-ka="ფარდა" data-ru="Штора" data-en="Curtain">ფარდა
+        <div data-ka="ფასი: მოთხოვნით" data-ru="Цена: по запросу" data-en="Price: on request">ფასი: მოთხოვნით</div>
+        <button onclick="openWhatsApp()">🛒 შეკვეთა</button>
+      </div>
+      <!-- Повторять блоки 22 раза -->
     </div>
   </section>
 
   <section id="gabelin">
-    <h2 class="section-title" data-text-ka="გაბელინი" data-text-ru="Гобелин" data-text-en="Gobelins">გაბელინი</h2>
+    <h2 class="section-title" data-ka="გაბელინი" data-ru="Гобелен" data-en="Gobelins">გაბელინი</h2>
     <div class="products">
-      <!-- 10 блоков гобелиновой ткани -->
-      <div class="product-card">Гобелиновая ткань - 19 ლარი</div>
-      <!-- повторить до 10 -->
+      <!-- 10 блоков гобелина -->
+      <div class="product-card" data-ka="გაბელინი 1მ" data-ru="Гобелен 1м" data-en="Gobelins 1m">გაბელინი 1მ
+        <div data-ka="ფასი: 19 ლარი" data-ru="Цена: 19 лари" data-en="Price: 19 Lari">ფასი: 19 ლარი</div>
+        <button onclick="openWhatsApp()">🛒 შეკვეთა</button>
+      </div>
+      <!-- Повторять блоки 10 раз -->
     </div>
   </section>
 
   <section id="onas">
-    <h2 class="section-title" data-text-ka="ჩვენს შესახებ" data-text-ru="О нас" data-text-en="About us">ჩვენს შესახებ</h2>
-    <p data-text-ka="ეს გვერდი ხელოვნებისა და სილამაზის სამყაროა, სადაც თითოეული ქსოვილი ისტორიის მატარებელია. ჩვენ გიზიარებთ შრომით შექმნილ კოლექციას, რომელიც ხარისხს და სტილს აერთიანებს. ყველაფერი შერჩეულია სიყვარულით და გემოვნებით. ჩვენი მაღაზია 'Russell' დაარსებულია 2006 წელს. მადლობა, რომ იყავით ჩვენი მომხმარებელი."
-       data-text-ru="Этот сайт — мир искусства и красоты, где каждая ткань несёт историю. Мы делимся коллекцией, созданной вручную, объединяющей качество и стиль. Всё отобрано с любовью и вкусом. Наш магазин 'Russell' создан в 2006 году. Спасибо, что вы являетесь нашим покупателем."
-       data-text-en="This site is a world of art and beauty, where every fabric carries a story. We share a handmade collection combining quality and style. Everything is selected with love and taste. Our store 'Russell' was established in 2006. Thank you for being our customer.">...</p>
+    <h2 class="section-title" data-ka="ჩვენ შესახებ" data-ru="О нас" data-en="About">ჩვენ შესახებ</h2>
+    <p style="max-width:800px;margin:0 auto;text-align:center;" data-ka="ჩვენი მაღაზია 'რუსლ' დაარსდა 2006 წელს. გმადლობთ, რომ ხართ ჩვენი მომხმარებელი. მობრძანდით ჩვენს სოციალურ გვერდებზე ან მოხვდით მაღაზიაში." data-ru="Наш магазин 'Russel' основан в 2006 году. Спасибо, что являетесь нашим клиентом. Можете также посмотреть наши социальные страницы или прийти в магазин лично." data-en="Our store 'Russel' was founded in 2006. Thank you for being our customer. You can also check our social pages or visit the store.">ჩვენი მაღაზია 'რუსლ' დაარსდა 2006 წელს. გმადლობთ, რომ ხართ ჩვენი მომხმარებელი. მობრძანდით ჩვენს სოციალურ გვერდებზე ან მოხვდით მაღაზიაში.</p>
   </section>
 </main>
 
 <a class="whatsapp-button" href="https://wa.me/995555558448" target="_blank">💬</a>
 
 <script>
-function toggleMenu() {
-  const nav = document.getElementById('nav');
-  nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+function toggleMenu(){
+  document.getElementById('nav').classList.toggle('show');
 }
-function toggleLang() {
-  const opts = document.getElementById('lang-options');
-  opts.style.display = opts.style.display === 'block' ? 'none' : 'block';
-}
-function setLang(lang){
-  document.querySelectorAll('[data-text-ka],[data-text-ru],[data-text-en]').forEach(el=>{
-    if(el.dataset['text'+lang.toUpperCase()]){
-      el.innerText = el.dataset['text'+lang.toUpperCase()];
-    }
-  });
-  const select = document.querySelector('.lang-select');
-  if(lang==='ka') select.innerText='ქართული';
-  if(lang==='ru') select.innerText='Русский';
-  if(lang==='en') select.innerText='English';
-  document.getElementById('lang-options').style.display='none';
-}
-</script>
 
-</body>
-</html>
+function openWhatsApp(){
+  window.open('https://wa.me/995555558448

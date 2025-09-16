@@ -1,32 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+ <!DOCTYPE html>
+<html lang="ka">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Russell</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  body { margin:0; font-family: 'Roboto', sans-serif; background: #fafafa; }
-  header { background: #111; color: #fff; display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; position: fixed; width: 100%; top:0; z-index: 1000; }
-  header .logo { font-size: 1.5em; font-weight: bold; }
+  body { margin:0; font-family: 'Roboto', sans-serif; background: #f3f8f2; }
+  header { display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; position: fixed; width: 100%; top:0; z-index: 1000; background: rgba(255,255,255,0.95); box-shadow:0 2px 10px rgba(0,0,0,0.1);}
+  .logo { font-size: 2em; font-weight: bold; color: #2e7d32; }
   nav { display: flex; gap: 20px; }
-  nav a { color: #fff; text-decoration: none; font-weight: 500; transition: 0.3s; }
-  nav a:hover { color: #f0a500; }
+  nav a { color: #333; text-decoration: none; font-weight: 500; transition: 0.3s; }
+  nav a:hover { color: #2e7d32; }
   .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 4px; }
-  .menu-toggle div { width: 25px; height: 3px; background: #fff; }
+  .menu-toggle div { width: 25px; height: 3px; background: #333; }
+  .language-switch { cursor:pointer; padding:5px 10px; border:1px solid #2e7d32; border-radius:5px; color:#2e7d32; font-weight:bold; }
   main { padding-top: 80px; }
   section { padding: 80px 20px; }
-  .hero { background: url('https://images.unsplash.com/photo-1602524202275-7a4c6d0f3ecf?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; color: #fff; height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .hero { background: linear-gradient(rgba(46,125,50,0.6), rgba(46,125,50,0.6)), url('https://images.unsplash.com/photo-1602524202275-7a4c6d0f3ecf?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; color: #fff; height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
   .hero h1 { font-size: 3em; margin: 0; }
   .hero p { font-size: 1.2em; margin: 10px 0 0; }
-  .section-title { text-align: center; font-size: 2em; margin-bottom: 40px; }
+  .section-title { text-align: center; font-size: 2em; margin-bottom: 40px; color: #2e7d32; }
   .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-  .product-card { background: #f5f5f5; padding: 15px; border-radius: 10px; text-align: center; transition: 0.3s; font-weight: bold; }
-  .product-card:hover { transform: scale(1.05); }
-  .contact-links a { display: block; margin: 5px 0; color: #111; text-decoration: none; font-weight: bold; }
+  .product-card { background: #ffffff; padding: 15px; border-radius: 10px; text-align: center; transition: 0.3s; box-shadow:0 4px 12px rgba(0,0,0,0.1); font-weight:bold; }
+  .product-card:hover { transform: scale(1.05); box-shadow:0 6px 15px rgba(0,0,0,0.2);}
+  .contact-links a { display: block; margin: 5px 0; color: #2e7d32; text-decoration: none; font-weight: bold; }
   .whatsapp-button { position: fixed; bottom: 20px; right: 20px; background: #25D366; color: #fff; border-radius: 50%; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; font-size: 2em; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; }
   @media (max-width:768px) {
-    nav { display: none; flex-direction: column; background: #111; position: absolute; top: 60px; right: 0; width: 200px; padding: 20px; }
+    nav { display: none; flex-direction: column; background: #fff; position: absolute; top: 60px; right: 0; width: 200px; padding: 20px; box-shadow:0 4px 10px rgba(0,0,0,0.1);}
     nav.show { display: flex; }
     .menu-toggle { display: flex; }
   }
@@ -40,101 +41,66 @@
     <div></div><div></div><div></div>
   </div>
   <nav id="nav">
-    <a href="#home">Главная</a>
-    <a href="#about">О бренде</a>
-    <a href="#products">Продукция</a>
-    <a href="#contacts">Контакты</a>
+    <a href="#home" data-lang-key="home">Home</a>
+    <a href="#about" data-lang-key="about">About</a>
+    <a href="#products" data-lang-key="products">Products</a>
+    <a href="#contacts" data-lang-key="contacts">Contacts</a>
   </nav>
+  <div class="language-switch" onclick="toggleLanguage()">KA</div>
 </header>
 
 <main>
   <section class="hero" id="home">
-    <h1>Добро пожаловать в Russell</h1>
-    <p>Высококачественные ковры и подушки с восточным узором</p>
+    <h1 data-lang-key="hero-title">Russell</h1>
+    <p data-lang-key="hero-desc">ეს გვერდი ხელოვნებისა და სილამაზის სამყაროა, სადაც თითოეული ქსოვილი ისტორიის მატარებელია. ჩვენი მაღაზია Russell დაარსებულია 2006 წელს. მადლობა სანახავად!</p>
   </section>
 
   <section id="about">
-    <h2 class="section-title">О бренде</h2>
-    <p style="max-width:800px;margin:0 auto;text-align:center;">Russell предлагает уникальные восточные ковры и подушки ручной работы. Наши изделия сочетают традиции и современный стиль, чтобы ваш дом стал уютным и красивым.</p>
+    <h2 class="section-title" data-lang-key="about-title">About Russell</h2>
+    <p style="max-width:800px;margin:0 auto;text-align:center;" data-lang-key="about-desc">Russell offers unique oriental carpets and handcrafted pillows. Our collection combines tradition and modern style, created with love and quality since 2006.</p>
   </section>
 
   <section id="products">
-    <h2 class="section-title">Продукция</h2>
-    <div class="products">
-      <!-- Ковры 10 блоков -->
-      <div class="product-card">Ковер 80x150 см — 49 лари</div>
-      <div class="product-card">Ковер 80x150 см — 49 лари</div>
-      <div class="product-card">Ковер 80x150 см — 49 лари</div>
-      <div class="product-card">Ковер 80x150 см — 49 лари</div>
-      <div class="product-card">Ковер 80x150 см — 49 лари</div>
-      <div class="product-card">Ковер 80x150 см — 49 лари</div>
-      <div class="product-card">Ковер 80x150 см — 49 лари</div>
-      <div class="product-card">Ковер 80x150 см — 49 лари</div>
-      <div class="product-card">Ковер 80x150 см — 49 лари</div>
-      <div class="product-card">Ковер 80x150 см — 49 лари</div>
+    <h2 class="section-title" data-lang-key="products-title">Products</h2>
+    <div class="products" id="product-grid">
+      <!-- Блоки товаров будут добавляться здесь позже с фотографиями -->
+    </div>
+  </section>
 
-      <!-- Подушки 35 блоков -->
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
-      <div class="product-card">Подушка 50x50 см — 19 лари</div>
+  <section id="contacts">
+    <h2 class="section-title" data-lang-key="contacts-title">Contacts</h2>
+    <div class="contact-links" style="text-align:center;">
+      <a href="https://www.instagram.com/russelltex_/" target="_blank">Instagram: @russelltex_</a>
+      <a href="https://m.facebook.com/61577510738128/" target="_blank">Facebook</a>
+      <a href="https://wa.me/995555558448" target="_blank">WhatsApp: +995 555 558 448</a>
+    </div>
+  </section>
+</main>
 
-      <!-- Шторы 22 блока -->
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
-      <div class="product-card">Шторы — цена по запросу</div>
+<a class="whatsapp-button" href="https://wa.me/995555558448" target="_blank">💬</a>
 
-      <!-- Гобеленовая ткань 10 блоков -->
-      <div class="product-card">Гобеленовая ткань, 1 метр — 19 лари</div>
-      <div class="product-card">Гобеленовая ткань, 1 метр — 19 лари</div>
-      <div class="product-card">Гобеленовая ткань, 1 метр — 19 лари</div>
-      <div class="product-card">Гобеленовая ткань, 1 метр — 19 лари</div>
-      <div class="product-card">Гобеленовая ткань, 1 метр — 19 лари</div>
-      <div class
+<script>
+// Меню для мобильных
+function toggleMenu() {
+  document.getElementById('nav').classList.toggle('show');
+}
+
+// Языковой переключатель
+let currentLang = 'ka';
+const translations = {
+  ka: {
+    'home':'მთავარი','about':'ბრენდის შესახებ','products':'პროდუქცია','contacts':'კონტაქტები',
+    'hero-title':'Russell','hero-desc':'ეს გვერდი ხელოვნებისა და სილამაზის სამყაროა, სადაც თითოეული ქსოვილი ისტორიის მატარებელია. ჩვენი მაღაზია Russell დაარსებულია 2006 წელს. მადლობა სანახავად!',
+    'about-title':'ბრენდის შესახებ','about-desc':'Russell გთავაზობთ უნიკალურ აღმოსავლურ ხალიჩებსა და ხელნაკეთ ბალიშებს. ჩვენი კოლექცია აერთიანებს ტრადიციებსა და თანამედროვე სტილს, შექმნილი სიყვარულით და ხარისხით 2006 წლიდან.',
+    'products-title':'პროდუქცია','contacts-title':'კონტაქტები'
+  },
+  en: {
+    'home':'Home','about':'About','products':'Products','contacts':'Contacts',
+    'hero-title':'Russell','hero-desc':'This is a world of art and beauty, where every fabric carries history. Our store Russell was founded in 2006. Thank you for visiting!',
+    'about-title':'About Russell','about-desc':'Russell offers unique oriental carpets and handcrafted pillows. Our collection combines tradition and modern style, created with love and quality since 2006.',
+    'products-title':'Products','contacts-title':'Contacts'
+  },
+  ru: {
+    'home':'Главная','about':'О бренде','products':'Продукция','contacts':'Контакты',
+    'hero-title':'Russell','hero-desc':'Это мир искусства и красоты, где каждая ткань хранит историю. Наш магазин Russell создан в 2006 году. Спасибо за просмотр!',
+    'about-title':'О бренде','about-desc':'Russell предлагает уникальные восточные ковры и подушки ручной работы. Коллекция сочетает традиции и современный стиль, создан

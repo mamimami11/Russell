@@ -1,112 +1,101 @@
 <!DOCTYPE html>
 <html lang="ka">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, orientation=portrait">
-  <title>Russel</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      font-family: "Arial", sans-serif;
-      background: linear-gradient(to bottom, #e8f5e9, #ffffff);
-      overflow-x: hidden;
-    }
-    /* Запрет переворота */
-    @media screen and (orientation: landscape) {
-      body::before {
-        content: "გთხოვთ გამოიყენოთ ვერტიკალური რეჟიმი 📱";
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: #fff;
-        color: #2e7d32;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 20px;
-        z-index: 9999;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Russell</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+body { margin:0; font-family: 'Roboto', sans-serif; background:#f2f5f0; overflow-x:hidden; }
+header { display:flex; justify-content:space-between; align-items:center; padding:15px 30px; background:#2c7a4d; color:#fff; position:fixed; width:100%; top:0; z-index:1000; }
+.logo { font-size:2em; font-weight:bold; text-align:center; flex:1; }
+.menu-toggle { cursor:pointer; display:flex; flex-direction:column; gap:5px; }
+.menu-toggle div { width:30px; height:3px; background:#fff; }
+nav { display:flex; gap:20px; }
+nav a { color:#fff; text-decoration:none; font-weight:500; }
+nav a:hover { color:#ffd700; }
+#lang-select { cursor:pointer; background:#1e5938; padding:5px 10px; border-radius:5px; }
+
+main { padding-top:90px; }
+.slider { width:100%; height:80vh; position:relative; overflow:hidden; }
+.slide { width:100%; height:100%; position:absolute; top:0; left:100%; background-size:cover; background-position:center; transition:0.8s; }
+.slide.active { left:0; }
+
+section { padding:60px 20px; }
+.section-title { text-align:center; font-size:2em; margin-bottom:40px; }
+.products { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
+.product-card { background:#fff; padding:15px; border-radius:10px; text-align:center; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:0.3s; }
+.product-card:hover { transform:scale(1.05); }
+.buy-buttons { margin-top:10px; display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
+.buy-buttons a { padding:8px 12px; border-radius:5px; text-decoration:none; color:#fff; font-weight:bold; }
+.buy-online { background:#25D366; }
+.buy-whatsapp { background:#128C7E; }
+
+@media(max-width:768px) {
+nav { display:none; position:absolute; top:60px; right:0; flex-direction:column; background:#2c7a4d; padding:20px; }
+nav.show { display:flex; }
+}
+</style>
 </head>
-<body class="text-gray-800">
+<body>
 
-  <!-- Верхняя панель -->
-  <header class="flex justify-between items-center px-4 py-3 bg-green-600 text-white">
-    <!-- Меню (троеточие) -->
-    <button id="menu-btn" class="text-2xl">⋮</button>
-
-    <!-- Логотип -->
-    <h1 class="text-2xl font-bold">RUSSEL</h1>
-
-    <!-- Выбор языка -->
-    <div class="relative">
-      <button id="lang-btn" class="px-2 py-1 bg-white text-green-700 rounded">🌐</button>
-      <div id="lang-menu" class="hidden absolute right-0 mt-2 w-32 bg-white border rounded shadow">
-        <button class="block w-full px-2 py-1 hover:bg-green-100" onclick="changeLang('ka')">🇬🇪 ქართული</button>
-        <button class="block w-full px-2 py-1 hover:bg-green-100" onclick="changeLang('ru')">🇷🇺 Русский</button>
-        <button class="block w-full px-2 py-1 hover:bg-green-100" onclick="changeLang('en')">🇬🇧 English</button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Выпадающее меню -->
-  <nav id="menu" class="hidden absolute top-14 left-0 bg-white shadow-md rounded-md p-4 space-y-2 z-50">
-    <a href="#fardagebi" class="block text-gray-700 hover:text-green-600">ფარდაგები</a>
-    <a href="#balishkebi" class="block text-gray-700 hover:text-green-600">ბალიშები</a>
-    <a href="#phardebi" class="block text-gray-700 hover:text-green-600">ფარდები</a>
-    <a href="#gobelini" class="block text-gray-700 hover:text-green-600">გობელინის ქსოვილი</a>
-    <a href="#about" class="block text-gray-700 hover:text-green-600">ჩვენ შესახებ</a>
+<header>
+  <div class="menu-toggle" onclick="toggleMenu()">
+    <div></div><div></div><div></div>
+  </div>
+  <div class="logo">Russell</div>
+  <div id="lang-select" onclick="toggleLang()">ქართული</div>
+  <nav id="nav">
+    <a href="#covri" data-ka="ფარდაგები" data-ru="Ковры" data-en="Carpets">ფარდაგები</a>
+    <a href="#balishebi" data-ka="ბალიშები" data-ru="Подушки" data-en="Pillows">ბალიშები</a>
+    <a href="#fardeebi" data-ka="ფარდები" data-ru="Шторы" data-en="Curtains">ფარდები</a>
+    <a href="#gobeleni" data-ka="გობელენი" data-ru="Гобелин" data-en="Tapestry">გობელენი</a>
+    <a href="#onas" data-ka="ჩვენს შესახებ" data-ru="О нас" data-en="About">ჩვენს შესახებ</a>
   </nav>
+</header>
 
-  <!-- Главные блоки -->
-  <main class="p-6 space-y-8">
+<main>
+  <!-- Слайдер -->
+  <div class="slider">
+    <div class="slide active" style="background-image:url('https://via.placeholder.com/1500x800?text=Ковер');"></div>
+    <div class="slide" style="background-image:url('https://via.placeholder.com/1500x800?text=Подушка');"></div>
+    <div class="slide" style="background-image:url('https://via.placeholder.com/1500x800?text=Штора');"></div>
+  </div>
 
-    <section id="fardagebi" class="p-6 bg-gray-50 rounded shadow">
-      <h2 class="text-2xl font-bold text-green-700 mb-2">ფარდაგები</h2>
-      <p class="text-gray-600">აქ იქნება ფარდაგების ბლოკი.</p>
-    </section>
+  <!-- Ковры -->
+  <section id="covri">
+    <h2 class="section-title" data-ka="ფარდაგები" data-ru="Ковры" data-en="Carpets">ფარდაგები</h2>
+    <div class="products" id="covri-products">
+      <!-- 10 блоков ковров -->
+      ${Array.from({length:10}).map((_,i)=>`<div class="product-card" data-ka="ფარდაგი 150x80" data-ru="Ковер 150x80 см" data-en="Carpet 150x80 cm">ფარდაგი 150x80<div class="buy-buttons"><a href="#" class="buy-online">💳</a><a href="https://wa.me/995555558448" class="buy-whatsapp">💬</a></div></div>`).join('')}
+    </div>
+  </section>
 
-    <section id="balishkebi" class="p-6 bg-gray-50 rounded shadow">
-      <h2 class="text-2xl font-bold text-green-700 mb-2">ბალიშები</h2>
-      <p class="text-gray-600">აქ იქნება ბალიშების ბლოკი.</p>
-    </section>
+  <!-- Подушки -->
+  <section id="balishebi">
+    <h2 class="section-title" data-ka="ბალიშები" data-ru="Подушки" data-en="Pillows">ბალიშები</h2>
+    <div class="products" id="balishebi-products">
+      ${Array.from({length:35}).map((_,i)=>`<div class="product-card" data-ka="ბალიში 50x50" data-ru="Подушка 50x50 см" data-en="Pillow 50x50 cm">ბალიში 50x50<div class="buy-buttons"><a href="#" class="buy-online">💳</a><a href="https://wa.me/995555558448" class="buy-whatsapp">💬</a></div></div>`).join('')}
+    </div>
+  </section>
 
-    <section id="phardebi" class="p-6 bg-gray-50 rounded shadow">
-      <h2 class="text-2xl font-bold text-green-700 mb-2">ფარდები</h2>
-      <p class="text-gray-600">აქ იქნება ფარდების ბლოკი.</p>
-    </section>
+  <!-- Шторы -->
+  <section id="fardeebi">
+    <h2 class="section-title" data-ka="ფარდები" data-ru="Шторы" data-en="Curtains">ფარდები</h2>
+    <div class="products" id="fardeebi-products">
+      ${Array.from({length:22}).map((_,i)=>`<div class="product-card" data-ka="ფარდა მაგალითი" data-ru="Штора пример" data-en="Curtain example">ფარდა მაგალითი<div class="buy-buttons"><a href="#" class="buy-online">💳</a><a href="https://wa.me/995555558448" class="buy-whatsapp">💬</a></div></div>`).join('')}
+    </div>
+  </section>
 
-    <section id="gobelini" class="p-6 bg-gray-50 rounded shadow">
-      <h2 class="text-2xl font-bold text-green-700 mb-2">გობელინის ქსოვილი</h2>
-      <p class="text-gray-600">აქ იქნება გობელინის ქსოვილის ბლოკი.</p>
-    </section>
+  <!-- Гобелин -->
+  <section id="gobeleni">
+    <h2 class="section-title" data-ka="გობელენი" data-ru="Гобелин" data-en="Tapestry">გობელენი</h2>
+    <div class="products" id="gobeleni-products">
+      ${Array.from({length:10}).map((_,i)=>`<div class="product-card" data-ka="გობელინი 1მ" data-ru="Гобелиновая ткань 1м" data-en="Tapestry 1m">გობელინი 1მ<div class="buy-buttons"><a href="#" class="buy-online">💳</a><a href="https://wa.me/995555558448" class="buy-whatsapp">💬</a></div></div>`).join('')}
+    </div>
+  </section>
 
-    <section id="about" class="p-6 bg-gray-50 rounded shadow">
-      <h2 class="text-2xl font-bold text-green-700 mb-2">ჩვენ შესახებ</h2>
-      <p class="text-gray-600">
-        კეთილი იყოს თქვენი მობრძანება ჩვენს საიტზე.  
-        გმადლობთ, რომ ხართ ჩვენი მომხმარებელი. 🌿
-      </p>
-    </section>
-
-  </main>
-
-  <script>
-    // меню
-    document.getElementById("menu-btn").onclick = () => {
-      document.getElementById("menu").classList.toggle("hidden");
-    };
-
-    // языки
-    document.getElementById("lang-btn").onclick = () => {
-      document.getElementById("lang-menu").classList.toggle("hidden");
-    };
-
-    function changeLang(lang) {
-      alert("Language switched to: " + lang);
-      document.getElementById("lang-menu").classList.add("hidden");
-    }
-  </script>
-</body>
-</html>
+  <!-- О нас -->
+  <section id="onas">
+    <h2 class="section-title" data-ka="ჩვენს შესახებ" data-ru="О нас" data-en="About">ჩვენს შესახებ</h2>
+    <p data-ka="Russell გთავაზობთ უნიკალურ ხელნაკეთ ფარდაგ

@@ -2,39 +2,52 @@
 <html lang="ka">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Russell</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-body { margin:0; font-family: 'Roboto', sans-serif; background:#f2f5f0; overflow-x:hidden; }
-header { display:flex; justify-content:space-between; align-items:center; padding:15px 30px; background:#2c7a4d; color:#fff; position:fixed; width:100%; top:0; z-index:1000; }
-.logo { font-size:2em; font-weight:bold; text-align:center; flex:1; }
-.menu-toggle { cursor:pointer; display:flex; flex-direction:column; gap:5px; }
-.menu-toggle div { width:30px; height:3px; background:#fff; }
-nav { display:flex; gap:20px; }
-nav a { color:#fff; text-decoration:none; font-weight:500; }
-nav a:hover { color:#ffd700; }
-#lang-select { cursor:pointer; background:#1e5938; padding:5px 10px; border-radius:5px; }
+  /* Общие стили */
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body { font-family: 'Roboto', sans-serif; line-height: 1.6; background: #f9f9f9; color: #111; }
+  a { text-decoration: none; color: inherit; }
+  img { max-width: 100%; display: block; }
 
-main { padding-top:90px; }
-.slider { width:100%; height:80vh; position:relative; overflow:hidden; }
-.slide { width:100%; height:100%; position:absolute; top:0; left:100%; background-size:cover; background-position:center; transition:0.8s; }
-.slide.active { left:0; }
+  /* Хедер */
+  header { position: fixed; top:0; width:100%; background:#2e7d32; color:#fff; z-index:1000; display:flex; justify-content:space-between; align-items:center; padding:15px 20px; }
+  .logo { font-size:2em; font-weight:bold; text-align:center; flex:1; }
+  .menu-toggle { cursor:pointer; display:flex; flex-direction:column; gap:5px; }
+  .menu-toggle div { width:25px; height:3px; background:#fff; }
+  nav { position: fixed; top:0; left:-250px; width:250px; height:100%; background:#1b5e20; padding-top:60px; display:flex; flex-direction:column; transition:0.3s; z-index:999; }
+  nav a { padding:15px 20px; color:#fff; font-weight:bold; transition:0.2s; }
+  nav a:hover { background:#388e3c; }
+  nav.show { left:0; }
 
-section { padding:60px 20px; }
-.section-title { text-align:center; font-size:2em; margin-bottom:40px; }
-.products { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; }
-.product-card { background:#fff; padding:15px; border-radius:10px; text-align:center; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:0.3s; }
-.product-card:hover { transform:scale(1.05); }
-.buy-buttons { margin-top:10px; display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
-.buy-buttons a { padding:8px 12px; border-radius:5px; text-decoration:none; color:#fff; font-weight:bold; }
-.buy-online { background:#25D366; }
-.buy-whatsapp { background:#128C7E; }
+  /* Языковой переключатель */
+  .lang-switch { position: fixed; top:15px; right:20px; background:#fff; color:#111; padding:5px 10px; border-radius:5px; font-weight:bold; cursor:pointer; z-index:1001; }
+  .lang-switch select { border:none; background:transparent; font-weight:bold; cursor:pointer; }
 
-@media(max-width:768px) {
-nav { display:none; position:absolute; top:60px; right:0; flex-direction:column; background:#2c7a4d; padding:20px; }
-nav.show { display:flex; }
-}
+  /* Слайдер */
+  .slider { margin-top:80px; width:100%; height:60vh; overflow:hidden; position:relative; }
+  .slides { display:flex; width:400%; height:100%; transition:0.8s ease; }
+  .slide { width:100%; flex-shrink:0; display:flex; justify-content:center; align-items:center; font-size:2em; color:#fff; font-weight:bold; text-align:center; background:#4caf50; }
+
+  /* Секции */
+  section { padding:80px 20px; max-width:1200px; margin:0 auto; }
+  .section-title { font-size:2em; margin-bottom:30px; text-align:center; }
+  .products { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; }
+  .product-card { background:#fff; padding:20px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1); text-align:center; transition:0.3s; cursor:pointer; }
+  .product-card:hover { transform:scale(1.05); }
+
+  /* Модальное окно */
+  .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:2000; }
+  .modal-content { background:#fff; padding:30px; border-radius:10px; max-width:500px; width:90%; text-align:center; }
+  .close-modal { cursor:pointer; color:#333; float:right; font-size:1.5em; }
+
+  /* Мобильные стили */
+  @media(max-width:768px){
+    .slider { height:40vh; }
+    .lang-switch { top:10px; right:10px; }
+  }
 </style>
 </head>
 <body>
@@ -44,58 +57,128 @@ nav.show { display:flex; }
     <div></div><div></div><div></div>
   </div>
   <div class="logo">Russell</div>
-  <div id="lang-select" onclick="toggleLang()">ქართული</div>
-  <nav id="nav">
-    <a href="#covri" data-ka="ფარდაგები" data-ru="Ковры" data-en="Carpets">ფარდაგები</a>
-    <a href="#balishebi" data-ka="ბალიშები" data-ru="Подушки" data-en="Pillows">ბალიშები</a>
-    <a href="#fardeebi" data-ka="ფარდები" data-ru="Шторы" data-en="Curtains">ფარდები</a>
-    <a href="#gobeleni" data-ka="გობელენი" data-ru="Гобелин" data-en="Tapestry">გობელენი</a>
-    <a href="#onas" data-ka="ჩვენს შესახებ" data-ru="О нас" data-en="About">ჩვენს შესახებ</a>
-  </nav>
 </header>
 
-<main>
-  <!-- Слайдер -->
-  <div class="slider">
-    <div class="slide active" style="background-image:url('https://via.placeholder.com/1500x800?text=Ковер');"></div>
-    <div class="slide" style="background-image:url('https://via.placeholder.com/1500x800?text=Подушка');"></div>
-    <div class="slide" style="background-image:url('https://via.placeholder.com/1500x800?text=Штора');"></div>
-  </div>
+<nav id="nav">
+  <a href="#pardeebi" onclick="showSection('pardeebi')">ფარდაგები</a>
+  <a href="#balishebi" onclick="showSection('balishebi')">ბალიშები</a>
+  <a href="#farda" onclick="showSection('farda')">ფარდა</a>
+  <a href="#gobelini" onclick="showSection('gobelini')">გობელენის ქსოვილი</a>
+  <a href="#onas" onclick="showSection('onas')">ჩვენ შესახებ</a>
+</nav>
 
+<div class="lang-switch">
+  <select id="language" onchange="changeLanguage(this.value)">
+    <option value="ka">KARTULI</option>
+    <option value="ru">RUSULI</option>
+    <option value="en">INGLISULI</option>
+  </select>
+</div>
+
+<div class="slider">
+  <div class="slides" id="slides">
+    <div class="slide">სალამი, კეთილი იყოს თქვენი მობრძანება Russell-ში</div>
+    <div class="slide">Высококачественные ковры и подушки</div>
+    <div class="slide">Premium carpets and cushions with oriental patterns</div>
+    <div class="slide">სალამი, კეთილი იყოს თქვენი მობრძანება Russell-ში</div>
+  </div>
+</div>
+
+<main>
   <!-- Ковры -->
-  <section id="covri">
+  <section id="pardeebi">
     <h2 class="section-title" data-ka="ფარდაგები" data-ru="Ковры" data-en="Carpets">ფარდაგები</h2>
-    <div class="products" id="covri-products">
-      <!-- 10 блоков ковров -->
-      ${Array.from({length:10}).map((_,i)=>`<div class="product-card" data-ka="ფარდაგი 150x80" data-ru="Ковер 150x80 см" data-en="Carpet 150x80 cm">ფარდაგი 150x80<div class="buy-buttons"><a href="#" class="buy-online">💳</a><a href="https://wa.me/995555558448" class="buy-whatsapp">💬</a></div></div>`).join('')}
+    <div class="products" id="carpets">
+      <!-- 10 блоков -->
+      <div class="product-card" data-price="49 ლარ">Ковер 1</div>
+      <div class="product-card" data-price="49 ლარ">Ковер 2</div>
+      <div class="product-card" data-price="49 ლар">Ковер 3</div>
+      <div class="product-card" data-price="49 ლар">Ковер 4</div>
+      <div class="product-card" data-price="49 ლар">Ковер 5</div>
+      <div class="product-card" data-price="49 ლар">Ковер 6</div>
+      <div class="product-card" data-price="49 ლар">Ковер 7</div>
+      <div class="product-card" data-price="49 ლар">Ковер 8</div>
+      <div class="product-card" data-price="49 ლар">Ковер 9</div>
+      <div class="product-card" data-price="49 ლар">Ковер 10</div>
     </div>
   </section>
 
   <!-- Подушки -->
   <section id="balishebi">
-    <h2 class="section-title" data-ka="ბალიშები" data-ru="Подушки" data-en="Pillows">ბალიშები</h2>
-    <div class="products" id="balishebi-products">
-      ${Array.from({length:35}).map((_,i)=>`<div class="product-card" data-ka="ბალიში 50x50" data-ru="Подушка 50x50 см" data-en="Pillow 50x50 cm">ბალიში 50x50<div class="buy-buttons"><a href="#" class="buy-online">💳</a><a href="https://wa.me/995555558448" class="buy-whatsapp">💬</a></div></div>`).join('')}
+    <h2 class="section-title" data-ka="ბალიშები" data-ru="Подушки" data-en="Cushions">ბალიშები</h2>
+    <div class="products" id="cushions">
+      <!-- 35 блоков -->
+      <script>
+        for(let i=1;i<=35;i++){
+          document.write('<div class="product-card" data-price="19 ლар">Подушка '+i+'</div>');
+        }
+      </script>
     </div>
   </section>
 
   <!-- Шторы -->
-  <section id="fardeebi">
-    <h2 class="section-title" data-ka="ფარდები" data-ru="Шторы" data-en="Curtains">ფარდები</h2>
-    <div class="products" id="fardeebi-products">
-      ${Array.from({length:22}).map((_,i)=>`<div class="product-card" data-ka="ფარდა მაგალითი" data-ru="Штора пример" data-en="Curtain example">ფარდა მაგალითი<div class="buy-buttons"><a href="#" class="buy-online">💳</a><a href="https://wa.me/995555558448" class="buy-whatsapp">💬</a></div></div>`).join('')}
+  <section id="farda">
+    <h2 class="section-title" data-ka="ფარდა" data-ru="Шторы" data-en="Curtains">ფარდა</h2>
+    <div class="products" id="curtains">
+      <script>
+        for(let i=1;i<=22;i++){
+          document.write('<div class="product-card" data-price="по запросу">Штора '+i+'</div>');
+        }
+      </script>
     </div>
   </section>
 
   <!-- Гобелин -->
-  <section id="gobeleni">
-    <h2 class="section-title" data-ka="გობელენი" data-ru="Гобелин" data-en="Tapestry">გობელენი</h2>
-    <div class="products" id="gobeleni-products">
-      ${Array.from({length:10}).map((_,i)=>`<div class="product-card" data-ka="გობელინი 1მ" data-ru="Гобелиновая ткань 1м" data-en="Tapestry 1m">გობელინი 1მ<div class="buy-buttons"><a href="#" class="buy-online">💳</a><a href="https://wa.me/995555558448" class="buy-whatsapp">💬</a></div></div>`).join('')}
+  <section id="gobelini">
+    <h2 class="section-title" data-ka="გობელენის ქსოვილი" data-ru="Гобелиновая ткань" data-en="Gobelin Fabric">გობელენის ქსოვილი</h2>
+    <div class="products" id="gobelins">
+      <script>
+        for(let i=1;i<=10;i++){
+          document.write('<div class="product-card" data-price="19 ლар">Гобелин '+i+'</div>');
+        }
+      </script>
     </div>
   </section>
 
   <!-- О нас -->
   <section id="onas">
-    <h2 class="section-title" data-ka="ჩვენს შესახებ" data-ru="О нас" data-en="About">ჩვენს შესახებ</h2>
-    <p data-ka="Russell გთავაზობთ უნიკალურ ხელნაკეთ ფარდაგ
+    <h2 class="section-title" data-ka="ჩვენ შესახებ" data-ru="О нас" data-en="About Us">ჩვენ შესახებ</h2>
+    <p data-ka="Russell დაარსდა 2006 წელს. ჩვენ გთავაზობთ უნიკალურ ხელნაკეთ პროდუქტებს. გმადლობთ, რომ იყავით ჩვენი მომხმარებელი." data-ru="Магазин Russell основан в 2006 году. Мы предлагаем уникальные товары ручной работы. Спасибо, что вы являетесь нашим покупателем." data-en="Russell store founded in 2006. We offer unique handmade products. Thank you for being our customer.">
+      Russell დაარსდა 2006 წელს. ჩვენ გთავაზობთ უნიკალურ ხელნაკეთ პროდუქტებს. ხართ ჩვენი მომხმარებელი.
+    </p>
+  </section>
+</main>
+
+<!-- Модальное окно -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <p>Информация о товаре</p>
+  </div>
+</div>
+
+<script>
+  // Меню
+  function toggleMenu(){ document.getElementById('nav').classList.toggle('show'); }
+
+  // Переход к секции
+  function showSection(id){
+    document.getElementById(id).scrollIntoView({behavior:"smooth"});
+    toggleMenu();
+  }
+
+  // Слайдер
+  let currentSlide=0;
+  function nextSlide(){
+    const slides=document.getElementById('slides');
+    currentSlide=(currentSlide+1)%4;
+    slides.style.transform='translateX(-'+currentSlide*100+'%)';
+  }
+  setInterval(nextSlide,5000);
+
+  // Языки
+  function changeLanguage(lang){
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-ka]').forEach(el=>{
+      el.innerText = el.getAttribute('data-'+lang);
+    });

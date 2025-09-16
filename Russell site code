@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Russell Textiles</title>
+<style>
+body { font-family: Arial, sans-serif; text-align: center; background: #fafafa; margin:0; padding:0;}
+header { background: #2e7d32; color: white; padding: 20px 0; }
+h1 { margin: 0; font-size: 28px; }
+.container { padding: 20px; display: flex; flex-wrap: wrap; justify-content: center; }
+.product { background: #fff; border-radius: 10px; padding: 15px; margin: 10px; width: 200px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.product img { max-width: 100%; border-radius: 10px; }
+.price { font-size: 18px; color: #d32f2f; font-weight: bold; margin: 10px 0; }
+.btn { display: inline-block; padding: 8px 15px; background: #2e7d32; color: white; text-decoration: none; border-radius: 5px; margin-top: 10px; }
+</style>
+</head>
+<body>
+<header>
+<h1>Russell Textiles</h1>
+<p>Exclusive Rugs • Curtains • Pillows</p>
+</header>
+
+<div class="container">
+<!-- 10 ковров -->
+<div class="product"><img src="placeholder_rug1.jpg" alt="Rug 1"><h2>Oriental Rug 1</h2><p class="price">49 ლ • 2 or more = 40 ლ each</p><a class="btn" href="https://wa.me/995555558448">Order via WhatsApp</a></div>
+<div class="product"><img src="placeholder_rug2.jpg" alt="Rug 2"><h2>Oriental Rug 2</h2><p class="price">49 ლ • 2 or more = 40 ლ each</p><a class="btn" href="https://wa.me/995555558448">Order via WhatsApp</a></div>
+<div class="product"><img src="placeholder_rug3.jpg" alt="Rug 3"><h2>Oriental Rug 3</h2><p class="price">49 ლ • 2 or more = 40 ლ each</p><a class="btn" href="https://wa.me/995555558448">Order via WhatsApp</a></div>
+<div class="product"><img src="placeholder_rug4.jpg" alt="Rug 4"><h2>Oriental Rug 4</h2><p class="price">49 ლ • 2 or more = 40 ლ each</p><a class="btn" href="https://wa.me/995555558448">Order via WhatsApp</a></div>
+<div class="product"><img src="placeholder_rug5.jpg" alt="Rug 5"><h2>Oriental Rug 5</h2><p class="price">49 ლ • 2 or more = 40 ლ each</p><a class="btn" href="https://wa.me/995555558448">Order via WhatsApp</a></div>
+<div class="product"><img src="placeholder_rug6.jpg" alt="Rug 6"><h2>Oriental Rug 6</h2><p class="price">49 ლ • 2 or more = 40 ლ each</p><a class="btn" href="https://wa.me/995555558448">Order via WhatsApp</a></div>
+<div class="product"><img src="placeholder_rug7.jpg" alt="Rug 7"><h2>Oriental Rug 7</h2><p class="price">49 ლ • 2 or more = 40 ლ each</p><a class="btn" href="https://wa.me/995555558448">Order via WhatsApp</a></div>
+<div class="product"><img src="placeholder_rug8.jpg" alt="Rug 8"><h2>Oriental Rug 8</h2><p class="price">49 ლ • 2 or more = 40 ლ each</p><a class="btn" href="https://wa.me/995555558448">Order via WhatsApp</a></div>
+<div class="product"><img src="placeholder_rug9.jpg" alt="Rug 9"><h2>Oriental Rug 9</h2><p class="price">49 ლ • 2 or more = 40 ლ each</p><a class="btn" href="https://wa.me/995555558448">Order via WhatsApp</a></div>
+<div class="product"><img src="placeholder_rug10.jpg" alt="Rug 10"><h2>Oriental Rug 10</h2><p class="price">49 ლ • 2 or more = 40 ლ each</p><a class="btn" href="https://wa.me/995555558448">Order via WhatsApp</a></div>
+
+<!-- 22 шторы без цены -->
+<div class="product"><img src="placeholder_curtain1.jpg" alt="Curtain 1"><h2>Modern Curtain 1</h2><a class="btn" href="https://wa.me/995555558448">Order via WhatsApp</a></div>
+<div class="product"><img src="placeholder_curtain2.jpg" alt="Curtain 2"><h2>Modern Curtain 2</h2><a class="btn" href="https://wa.me/995555558448">Order via WhatsApp</a></div>
+<div class="product"><img src="placeholder_curtain3.jpg" alt="Curtain 3"><h2>Modern Curtain 3</h2><a class="btn" href="https://wa.me/995555558448">Order via WhatsApp</a></div>
+<!-- ...повторяем до Curtain22 ... -->
+<div class="product"><img src="placeholder_curtain22.jpg" alt="Curtain 22"><h2>Modern Curtain 22</h2><a class="btn" href="https://wa.me/995555558448">Order via WhatsApp</a></div>
+
+<!-- 35 подушек по 19 лари -->
+<div class="product"><img src="placeholder_pillow1.jpg" alt="Pillow 1"><h2>Linen Pillow 1</h2><p class="price">19 ლ</p><a class="btn" href="https://wa.me/995555558448">Order via WhatsApp</a></div>
+<div class="product"><img src="placeholder_pillow2.jpg" alt="Pillow 2"><h2>Linen Pillow 2</h2><p class="price">19 ლ</p><a class="btn" href="https://wa.me/995555558448">Order via WhatsApp</a></div>
+<!-- ...повторяем до Pillow35 ... -->
+<div class="product"><img src="placeholder_pillow35.jpg" alt="Pillow 35"><h2>Linen Pillow 35</h2><p class="price">19 ლ</p><a class="btn" href="https://wa.me/995555558448">Order via WhatsApp</a></div>
+
+</div>
+</body>
+</html>
